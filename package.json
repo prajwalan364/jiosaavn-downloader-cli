@@ -1,0 +1,25 @@
+{
+	"name": "jiosaavn-v2",
+	"version": "1.0.0",
+	"description": "",
+	"main": "downloader.js",
+	"scripts": {
+		"start": "node downloader.js"
+	},
+	"author": "Prajwalan",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^0.19.2",
+		"browser-id3-writer": "^4.4.0",
+		"chalk": "^4.1.0",
+		"cli-progress": "^3.8.2",
+		"colors": "^1.4.0",
+		"figlet": "^1.5.0",
+		"fluent-ffmpeg": "^2.1.2",
+		"got": "^11.5.2",
+		"lodash": "^4.17.20",
+		"node-downloader-helper": "^1.0.13",
+		"prompt-sync": "^4.2.0",
+		"user-agents": "^1.0.559"
+	}
+}
