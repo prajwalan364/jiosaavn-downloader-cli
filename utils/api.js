@@ -1,4 +1,4 @@
-/* API FOR JIOSAAVN SONGS DATA */
+/* API FOR FETCHING JIOSAAVN SONGS DATA */
 
 const axios = require('axios');
 const chalk = require('chalk');

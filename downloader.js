@@ -4,10 +4,10 @@
 	Author : Prajwalan M
 
 	Description: Download Songs From JioSaavn 
-	NOTE: some of the songs are in 128kbps(mp4,m4a) which are not supporting for metadata creatation,
+	NOTE: some of the songs are in mp4,m4a which are not supporting for metadata creatation,
 		  so these songs are converted to mp3 by using ffmpeg library
 
-	Warning: ffmpeg is required otherwise 128kbps (.mp4) are not working
+	Warning: ffmpeg is required otherwise .mp4 are not working
  
 	Install Instruction
 		ffmpeg Installation Instruction
@@ -122,13 +122,12 @@ const main = async () => {
 	while (true) {
 		console.log(
 			chalk.hex('#1dd1a1')(
-				'\n[1]: Single Song Download\n[2]: Search\n[3]: Album Download\n[0]: Exit'
+				'\n[1]: Single Song Download\n[2]: Search\n[3]: Album Download(Buggy)\n[0]: Exit'
 			)
 		);
 		const input = prompt('[ ➤ ]Enter Your Choice: ');
 		switch (input) {
 			case '1': {
-				let filenames;
 				const url = prompt('\t[ ➤ ] Enter the JioSaavn Song URL: ');
 				let songData = await generateSongData(url);
 				return await Download(
