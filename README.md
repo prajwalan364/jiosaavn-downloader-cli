@@ -2,6 +2,8 @@
 
 Download Music From Jiosaavn at Highest Quality (320Kbps)
 
+![cover](https://user-images.githubusercontent.com/40541176/90336209-d6b00f00-dff7-11ea-89e0-bcee9041bfb3.PNG)
+
 ## Getting Started
 
 ### Prerequisites
