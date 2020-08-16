@@ -44,7 +44,7 @@ npm start
 - Download an Album (Buggy)
 - Search for song
 
-### Music are downloaded in Download Folder
+### Music are downloaded in Download folder
 
 ## Issues
 
