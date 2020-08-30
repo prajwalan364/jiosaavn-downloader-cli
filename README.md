@@ -2,6 +2,8 @@
 
 Download Music From Jiosaavn at Highest Quality (320Kbps)
 
+![cover](https://user-images.githubusercontent.com/40541176/90336209-d6b00f00-dff7-11ea-89e0-bcee9041bfb3.PNG)
+
 ## Getting Started
 
 ### Prerequisites
@@ -12,6 +14,20 @@ Download Music From Jiosaavn at Highest Quality (320Kbps)
 
 Please make sure that you have node v10.x or latest and npm v5.x or latest versions installed on your machine.
 
+<<<<<<< HEAD
+=======
+### FFmpeg Installation
+
+- Download FFmpeg from: https://ffmpeg.org/download.html
+- Set your ffmpeg.exe and ffprobe.exe path in the libs/ffmpeg.js file
+![Capture](https://user-images.githubusercontent.com/40541176/90336145-6e612d80-dff7-11ea-8c90-951e2857c559.PNG)
+
+
+```diff
+Note: FFmpeg is must otherwise some of the songs are in mp4 format are not download.
+```
+
+>>>>>>> 96e0fd8e817685942ff247fba8070c2bedb49868
 ### Installing
 
 ```
@@ -30,7 +46,7 @@ npm start
 - Download an Album (Buggy)
 - Search for song
 
-### Music are downloaded in Download Folder
+### Music are downloaded in Download folder
 
 ## Issues
 
