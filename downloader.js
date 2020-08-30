@@ -112,7 +112,7 @@ const chkForFormat = async (file, coverFile, songData) => {
 
 const main = async () => {
 	console.log(
-		figlet.textSync('JIO SAAVN DOWNLAODER', {
+		figlet.textSync('JIO SAAVN DOWNLOADER', {
 			font: 'Bloody',
 			horizontalLayout: 'default',
 			verticalLayout: 'default',

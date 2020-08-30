@@ -1,10 +1,14 @@
-const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs');
+const path = require('path');
+
+const pathToffmpeg = require('ffmpeg-static');
+const ffmpeg = require('fluent-ffmpeg');
 const writingMetaData = require('../libs/writingMetaData');
 const chalk = require('chalk');
 
-ffmpeg.setFfmpegPath('./ffmpeg-20200730-134a48a-win64-static/bin/ffmpeg.exe'); //Add your ffmpeg.exe path
-ffmpeg.setFfprobePath('./ffmpeg-20200730-134a48a-win64-static/bin/ffprobe.exe'); // Add your ffprobe.exe path
+const pathToFfmpeg = path.join(__dirname, '..');
+
+ffmpeg.setFfmpegPath(`${pathToFfmpeg}/node_modules/ffmpeg-static/ffmpeg`);
 
 const convertTomp3 = async (path, coverFile, songData) => {
 	console.log(chalk.hex('#16a085')('[•]mp4 Detected Converting to mp3....'));

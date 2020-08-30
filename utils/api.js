@@ -25,11 +25,10 @@ const getSongID = async (song_link) => {
 	if (songIdUrl.includes('jiosaavn.com/')) {
 		axios.defaults.headers.common['User-Agent'] = user;
 		const res = await axios.get(song_link);
-
 		const id = res.data
 			.split('"song":{"type":"')[1]
-			.split('","image":')[0]
-			.split('"')[4];
+			.split(',')[2]
+			.split(':')[1];
 		return id;
 	}
 };
@@ -76,7 +75,8 @@ const generateSongData = async (link) => {
 		)
 	);
 	axios.defaults.headers.common['User-Agent'] = user;
-	const songId = await getSongID(link);
+	let songId = await getSongID(link);
+	songId = songId.slice(1, -1);
 	let songArray = new Array();
 	let songsObj = new Object();
 
@@ -152,6 +152,8 @@ const generateJSON = async (songDataArray, data) => {
 	});
 	return songDataArray;
 };
+
+//https://www.jiosaavn.com/song/genda-phool/GQUqRgBDQkk
 
 module.exports = {
 	generateSongData,
