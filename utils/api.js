@@ -2,7 +2,9 @@
 
 const axios = require('axios');
 const chalk = require('chalk');
+const _ = require('lodash');
 const UA = require('user-agents');
+const { link } = require('ffmpeg-static');
 const userAgentCreator = new UA({ deviceCategory: 'desktop' });
 
 const searchUrl =
@@ -11,6 +13,8 @@ const songIdUrl =
 	'https://www.jiosaavn.com/api.php?cc=in&_marker=0%3F_marker%3D0&_format=json&model=Redmi_5A&__call=song.getDetails&pids=';
 const albumUrl =
 	'https://www.jiosaavn.com/api.php?_format=json&__call=content.getAlbumDetails&albumid=';
+const playlistUrl =
+	'https://www.jiosaavn.com/api.php?__call=playlist.getDetails&_format=json&cc=in&_marker=0%3F_marker%3D0&listid=';
 
 let user = userAgentCreator.random().toString();
 
@@ -44,6 +48,17 @@ const getAlbumID = async (album_url) => {
 			.split(':')[1];
 		return albumId;
 	}
+};
+
+const getPlaylistID = async (link) => {
+	axios.defaults.headers.common['User-Agent'] = user;
+	const res = await axios.get(link);
+
+	const pid = res.data
+		.split('"playlist":{"type"')[1]
+		.split(',')[1]
+		.split(':')[1];
+	return pid;
 };
 
 const getDownloadLink = async (preview_link) => {
@@ -134,6 +149,31 @@ const generateSearchSongData = async (query) => {
 	return songsObj;
 };
 
+const generatePlaylistData = async (playlist_url) => {
+	console.log(
+		chalk.hex('#00d2d3')(
+			'Fetching...... (stuck at more than 1 min then restart)'
+		)
+	);
+	axios.defaults.headers.common['User-Agent'] = user;
+
+	let playlistId = await getPlaylistID(playlist_url);
+	playlistId = playlistId.slice(1, -1);
+	playlistId = Number(playlistId);
+
+	let songsArray = new Array();
+	let songsObj = new Object();
+
+	const res = await axios.get(playlistUrl + playlistId);
+
+	let data;
+	for (song of res.data.songs) {
+		data = await generateJSON(songsArray, song);
+	}
+	songsObj['result'] = data;
+	return songsObj;
+};
+
 const generateJSON = async (songDataArray, data) => {
 	songDataArray.push({
 		song_id: data.id,
@@ -141,6 +181,7 @@ const generateJSON = async (songDataArray, data) => {
 		album_title: data.album,
 		music: data.music,
 		artist_name: data.primary_artists,
+		singers: data.singers,
 		duration: data.duration,
 		song_image: await fixImage(data.image),
 		label: data.label,
@@ -153,10 +194,12 @@ const generateJSON = async (songDataArray, data) => {
 	return songDataArray;
 };
 
+//https://www.jiosaavn.com/featured/anirudh---tamil---jiotunes/dElOTOFAgw6O0eMLZZxqsA__
 //https://www.jiosaavn.com/song/genda-phool/GQUqRgBDQkk
 
 module.exports = {
 	generateSongData,
 	generateAlbumData,
 	generateSearchSongData,
+	generatePlaylistData,
 };
