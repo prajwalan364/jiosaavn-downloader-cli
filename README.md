@@ -13,6 +13,7 @@ Download Music From Jiosaavn at Highest Quality (320Kbps)
 ## Installation
 
 Please make sure that you have node v10.x or latest and npm v5.x or latest versions installed on your machine.
+
 ### Installing
 
 ```
@@ -29,6 +30,7 @@ npm start
 
 - Download a Single Song
 - Download an Album (Buggy)
+- Download Playlist(Buggy)
 - Search for song
 
 ### Music are downloaded in Download folder
