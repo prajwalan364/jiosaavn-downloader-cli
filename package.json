@@ -4,11 +4,13 @@
 	"description": "",
 	"main": "downloader.js",
 	"scripts": {
-		"start": "node downloader.js"
+		"start": "node downloader.js",
+		"debug": "ndb api.js"
 	},
 	"author": "Prajwalan",
 	"license": "ISC",
 	"dependencies": {
+		"async": "^3.2.0",
 		"axios": "^0.19.2",
 		"browser-id3-writer": "^4.4.0",
 		"chalk": "^4.1.0",
@@ -17,10 +19,16 @@
 		"ffmpeg-static": "^4.2.7",
 		"figlet": "^1.5.0",
 		"fluent-ffmpeg": "^2.1.2",
-		"got": "^11.5.2",
+		"got": "^11.6.0",
 		"lodash": "^4.17.20",
+		"music-metadata": "^7.0.2",
+		"ndb": "^1.1.5",
 		"node-downloader-helper": "^1.0.13",
+		"npm": "^6.14.8",
+		"progress": "^2.0.3",
 		"prompt-sync": "^4.2.0",
+		"request": "^2.88.2",
+		"su-downloader3-enhance": "^1.2.1",
 		"user-agents": "^1.0.559"
 	}
 }
