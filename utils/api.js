@@ -7,6 +7,8 @@ const UA = require('user-agents');
 const { link } = require('ffmpeg-static');
 const userAgentCreator = new UA({ deviceCategory: 'desktop' });
 
+const tokenUrl =
+	'https://www.jiosaavn.com/api.php?bitrate=320&api_version=4&_format=json&ctx=web6dot0&_marker=0&__call=song.generateAuthToken&url=';
 const searchUrl =
 	'https://www.jiosaavn.com/api.php?_format=json&n=5&p=1&_marker=0&ctx=android&__call=search.getResults&q=';
 const songIdUrl =
@@ -15,6 +17,9 @@ const albumUrl =
 	'https://www.jiosaavn.com/api.php?_format=json&__call=content.getAlbumDetails&albumid=';
 const playlistUrl =
 	'https://www.jiosaavn.com/api.php?__call=playlist.getDetails&_format=json&cc=in&_marker=0%3F_marker%3D0&listid=';
+
+const newPlaylistUrl =
+	'https://www.jiosaavn.com/api.php?__call=webapi.get&type=playlist&p=1&n=50&includeMetaTags=0&ctx=web6dot0&api_version=4&_format=json&_marker=0&token=';
 
 let user = userAgentCreator.random().toString();
 
@@ -97,8 +102,10 @@ const generateSongData = async (link) => {
 
 	if (songId != null) {
 		const res = await axios.get(songIdUrl + songId);
+		//console.log(res.data);
 		songData = await generateJSON(songArray, res.data[songId]);
 		songsObj['result'] = await songData;
+
 		return songsObj;
 	}
 };
@@ -174,6 +181,15 @@ const generatePlaylistData = async (playlist_url) => {
 	return songsObj;
 };
 
+const generateFromAuth = async (encrypted_media_url) => {
+	//console.log(encodeURIComponent(encrypted_media_url));
+	const res = await axios.get(
+		tokenUrl + encodeURIComponent(encrypted_media_url)
+	);
+
+	return res.data.auth_url;
+};
+
 const generateJSON = async (songDataArray, data) => {
 	songDataArray.push({
 		song_id: data.id,
@@ -190,16 +206,19 @@ const generateJSON = async (songDataArray, data) => {
 		encrypted_media_url: data.encrypted_media_url,
 		preview_url: data.media_preview_url,
 		download_link: await getDownloadLink(data.media_preview_url),
+		//decrypted_link: await generateFromAuth(data.)
 	});
 	return songDataArray;
 };
 
 //https://www.jiosaavn.com/featured/anirudh---tamil---jiotunes/dElOTOFAgw6O0eMLZZxqsA__
 //https://www.jiosaavn.com/song/genda-phool/GQUqRgBDQkk
+//generateSongData('https://www.jiosaavn.com/song/yethi-yethi/RBIcVDodWWQ');
 
 module.exports = {
 	generateSongData,
 	generateAlbumData,
 	generateSearchSongData,
 	generatePlaylistData,
+	generateFromAuth,
 };

@@ -7,8 +7,11 @@ const writingMetaData = require('../libs/writingMetaData');
 const chalk = require('chalk');
 
 const pathToFfmpeg = path.join(__dirname, '..');
+console.log(pathToffmpeg);
 
 ffmpeg.setFfmpegPath(`${pathToFfmpeg}/node_modules/ffmpeg-static/ffmpeg`);
+
+// ffmpeg.setFfmpegPath('../ffmpeg-20200730-134a48a-win64-static/bin/ffmpeg.exe');
 
 const convertTomp3 = async (path, coverFile, songData) => {
 	console.log(chalk.hex('#16a085')('[•]mp4 Detected Converting to mp3....'));

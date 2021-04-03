@@ -24,6 +24,7 @@ const colors = require('colors');
 const _ = require('lodash');
 const async = require('async');
 const UA = require('user-agents');
+const utf8 = require('utf8');
 
 const userAgentCreator = new UA({ deviceCategory: 'desktop' });
 
